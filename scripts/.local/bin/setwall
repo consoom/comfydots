@@ -1,0 +1,13 @@
+#!/bin/zsh
+
+cols=$(magick $1 -resize 25% -colors 6 -unique-colors txt:- | grep -E -o "\#.{6}" | grep -v "Image")
+
+col1=$(echo "dwm.normbgcolor: $(echo $cols | awk 'NR == 1 {print $0}')" | xrdb -merge)
+col2=$(echo "dwm.normbordercolor: $(echo $cols | awk 'NR == 2 {print $0}')" | xrdb -merge)
+col3=$(echo "dwm.normfgcolor: $(echo $cols | awk 'NR == 3 {print $0}')" | xrdb -merge)
+col4=$(echo "dwm.selbgcolor: $(echo $cols | awk 'NR == 4 {print $0}')" | xrdb -merge)
+col5=$(echo "dwm.selbordercolor: $(echo $cols | awk 'NR == 5 {print $0}')" | xrdb -merge)
+col6=$(echo "dwm.selfgcolor: $(echo $cols | awk 'NR == 6 {print $0}')" | xrdb -merge)
+
+pidof dwm > /dev/null && xdotool key super+F5
+xwallpaper --zoom $1

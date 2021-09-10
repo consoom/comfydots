@@ -1,0 +1,5 @@
+setwall $XDG_DATA_HOME/wallpapers/bg
+xcompmgr &
+remap &
+dwmblocks &
+exec dwm
