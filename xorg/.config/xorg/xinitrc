@@ -3,4 +3,5 @@ xcompmgr &
 xrdb $XDG_CONFIG_HOME/xorg/Xresources &
 remap &
 dwmblocks &
+unclutter &
 exec dwm
