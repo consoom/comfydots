@@ -1,7 +1,7 @@
-setwall $XDG_DATA_HOME/wallpapers/bg
 xcompmgr &
 xrdb $XDG_CONFIG_HOME/xorg/Xresources &
 remap &
 dwmblocks &
 unclutter &
+setwall $XDG_DATA_HOME/wallpapers/bg
 exec dwm
