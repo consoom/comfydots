@@ -1,0 +1,10 @@
+#!/bin/sh
+
+currenttime=$(date +%H)
+icon=""
+
+sct
+[ "$currenttime" -gt "20" ] || [ "$currenttime" -lt "08" ] && sct 4500 && icon="🔅"
+
+echo "${icon-?}"
+
