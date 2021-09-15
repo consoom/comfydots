@@ -3,8 +3,11 @@
 currenttime=$(date +%H)
 icon=""
 
-sct
-[ "$currenttime" -gt "20" ] || [ "$currenttime" -lt "08" ] && sct 4500 && icon="🔅"
+if [ "$currenttime" -gt "20" ] || [ "$currenttime" -lt "08" ]; then
+	sct 4500 && icon="🔅"
+else
+	sct
+fi
 
 echo "${icon-?}"
 
