@@ -59,15 +59,6 @@ archchrootsetup () {
 	# Installing basic packages
 	pacman -S --noconfirm --needed $(cat basicpkg)
 
-	# Installing paru - AUR helper
-	git clone https://aur.archlinux.org/paru.git; chown -R ${usernm}: paru
-	cd paru
-	sudo -u ${usernm} makepkg --noconfirm -si
-	cd ..; rm -rf paru
-	
-	# Installing AUR packages
-	sudo -u ${usernm} paru -S --noconfirm --needed $(cat aurpkg)
-
 	# Enabling daemons
 	systemctl enable NetworkManager
 
@@ -89,6 +80,15 @@ postsetup () {
 
 	# Symlink .zprofile in ~ to ~/.config/shell/profile
 	ln -sf /home/$USER/.config/shell/profile /home/$USER/.zprofile
+
+        # Installing paru - AUR helper
+        git clone https://aur.archlinux.org/paru.git
+        cd paru
+        makepkg --noconfirm -si
+        cd ..; rm -rf paru
+
+	# Installing AUR packages
+	paru -S --noconfirm --needed $(cat aurpkg)
 
 	# Finalizing
 	echo -e "\n---\nEnd of script reached. Please set passwords for both the root account and $USER:"
