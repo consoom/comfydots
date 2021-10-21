@@ -46,6 +46,9 @@ archchrootsetup () {
 
 	# Adding a simple user
 	useradd -m -G wheel -s /bin/zsh ${usernm}
+	
+	# Installing basic packages
+	pacman -S --noconfirm --needed $(cat basicpkg)
 
 	# Giving the wheel group sudo privileges (without password, insecure!)
 	sed -i "/# %wheel ALL=(ALL) NOPASSWD/s/^# //g" /etc/sudoers
@@ -55,9 +58,6 @@ archchrootsetup () {
 
 	# Disabling annoying system beep sound
 	echo "blacklist pcspkr" > /etc/modprobe.d/nobeep.conf ;
-
-	# Installing basic packages
-	pacman -S --noconfirm --needed $(cat basicpkg)
 
 	# Enabling daemons
 	systemctl enable NetworkManager
