@@ -29,4 +29,3 @@ xorg-xrandr
 xorg-server
 xorg-xinit
 libx11
-libxft
