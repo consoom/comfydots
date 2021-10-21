@@ -82,6 +82,7 @@ postsetup () {
 	ln -sf /home/$USER/.config/shell/profile /home/$USER/.zprofile
 
         # Installing paru - AUR helper
+	cd /home/$USER
         git clone https://aur.archlinux.org/paru.git
         cd paru
         makepkg --noconfirm -si
