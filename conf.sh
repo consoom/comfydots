@@ -71,6 +71,7 @@ archchrootsetup () {
 }
 
 postsetup () {
+	cd /home/$USER/.local/share/comfydots/
 	# Stowing dotfiles
 	stow --target=/home/$USER/ --no-folding scripts 
 	stow --target=/home/$USER/ --no-folding share
@@ -82,7 +83,6 @@ postsetup () {
 	ln -sf /home/$USER/.config/shell/profile /home/$USER/.zprofile
 
         # Installing paru - AUR helper
-	cd /home/$USER
         git clone https://aur.archlinux.org/paru.git
         cd paru
         makepkg --noconfirm -si
