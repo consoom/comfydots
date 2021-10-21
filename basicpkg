@@ -5,7 +5,9 @@ sudo
 networkmanager
 zsh
 dash
+stow
 
+xwallpaper
 imagemagick
 dmenu
 p7zip
