@@ -28,7 +28,7 @@ You can also delete it by running: `$ stow --target=/home/$USER/ -D zsh`.
 To learn more about stow, you could for example read [this article](https://web.archive.org/web/20210515192752/https://alexpearce.me/2016/02/managing-dotfiles-with-stow/).
 
 ## Configuration script
-I've also created a [configuration script](conf.sh), which on top of automatically deploying my dotfiles with stow, also installs packages that I frequently use. It also performs some basic commands I commonly use on a fresh *Arch Linux* installation, like adding a new user and setting the timezone. It does *not* help you partition your system nor configures your bootloader, as it's not meant to be bulletproof bootstrap script. That's why I don't recommend anyone running it, but it might be useful for some to get inspiration out of.
+I've also created a [configuration script](conf.sh), which on top of automatically deploying my dotfiles with stow, also installs packages that I frequently use. It also performs some basic commands I commonly use on a fresh *Arch Linux* installation, like adding a new user and setting the timezone. It does *not* help you partition your system nor configures your bootloader, as it's not meant to be a bulletproof bootstrap script. That's why I don't recommend anyone running it, but it might be useful for some to get inspiration out of.
 To use it, you have to edit the script to change some parameters, like your desired username and language, and then run it inside of a freshly pacstrapped arch-chroot environment. It does not install any of my graphical programs for now.
 
 ## Screenshot
