@@ -6,19 +6,19 @@ This repository includes a collection of my personal dotfiles, other configurati
 I use this repository as a way to version control my setup and keep track of changes, so I don't lose any of the configurations I want to keep. I've also included a *configuration script*, which performs tasks I normally do while installing Arch Linux. Even though this script also deploys my dotfiles, you should not consider it as a full bootstrap script, but rather as another way to keep track of the various things I normally want to do while installing my desktop. I use my dotfiles in combination with my builds of [dwm](https://github.com/consoom/dwm), [dwmblocks](https://github.com/consoom/dwmblocks) and st.
 
 ## Dotfiles installation
-My dotfiles are supposed to be managed with [GNU stow](https://www.gnu.org/software/stow/). I have a copy of this repository stored in *~/.local/share*, and in combination with stow, you can automatically create symlinks to the appropriate locations in the home directory, which I try to keep as clean as possible. It's visually represented like this: (example)
+My dotfiles are supposed to be managed with [GNU stow](https://www.gnu.org/software/stow/). I have a copy of this repository stored in *~/.local/share/comfydots*, and in combination with stow, you can automatically create symlinks to the appropriate locations in the home directory, which I try to keep as clean as possible. It's visually represented like this: (example)
 ```
-comfydots				← (this repo)
+comfydots		  ← (this repo)
 │
-└── xorg          ← (name of the stow 'package' - not actually anything in ~/)
-│   └─ .config    ← (will point to ~/.config)
-│       └─ xorg   ← (will point to ~/.config/xorg)
+└── xorg                  ← (name of the stow 'package' - not actually anything in ~/)
+│   └─ .config            ← (will point to ~/.config)
+│       └─ xorg           ← (will point to ~/.config/xorg)
 │           |── Xresources
 │           |── xinitrc
 │
-└── zsh         ← (name of the stow 'package' - not actually anything in ~/)
-│   └─ .config  ← (will point to ~/.config)
-│       └─ zsh  ← (will point to ~/.config/zsh)
+└── zsh                   ← (name of the stow 'package' - not actually anything in ~/)
+│   └─ .config            ← (will point to ~/.config)
+│       └─ zsh            ← (will point to ~/.config/zsh)
 │           |── .zshrc
 ...
 ```
