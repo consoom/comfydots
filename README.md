@@ -10,20 +10,20 @@ My dotfiles are supposed to be managed with [GNU stow](https://www.gnu.org/softw
 ```
 comfydots				← (this repo)
 │
-└───xorg				← (name of the stow 'package' - does not represent anything in ~/)
-│	└───.config			← (will point to ~/.config)
-│		│	└───xorg	← (will point to ~/.config/xorg)
-│		│	│	xinitrc
-│		│	│	Xresources
+└── xorg          ← (name of the stow 'package' - not actually anything in ~/)
+│   └─ .config    ← (will point to ~/.config)
+│       └─ xorg   ← (will point to ~/.config/xorg)
+│           |── Xresources
+│           |── xinitrc
 │
-└───zsh					← (name of the stow 'package' - does not represent anything in ~/)
-│	└───.config			← (will point to ~/.config)
-│		│	└───zsh		← (will point to ~/.config/zsh)
-│		│	│	.zshrc
+└── zsh         ← (name of the stow 'package' - not actually anything in ~/)
+│   └─ .config  ← (will point to ~/.config)
+│       └─ zsh  ← (will point to ~/.config/zsh)
+│           |── .zshrc
 ...
 ```
 Using stow, you can choose to install a 'stow package', which then will create symlinks to all files inside of it to a location you specify, which probably will be your home directory.
-For example, to install my zsh configuration, run: `$ stow --target=/home/$USER/ --no-folding zsh`.
+For example, to install my zsh configuration, run: `$ stow --target=/home/$USER/ --no-folding zsh`. It the case of this command, it will symlink everything in the zsh package (so the .zshrc file) to the respective location, just like how it is in the hierarchy of the stow package. This means that the .zshrc will be placed inside of *~/.config/zsh/.zshrc*.
 You can also delete it by running: `$ stow --target=/home/$USER/ -D zsh`.
 To learn more about stow, you could for example read [this article](https://web.archive.org/web/20210515192752/https://alexpearce.me/2016/02/managing-dotfiles-with-stow/).
 
