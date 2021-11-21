@@ -7,6 +7,7 @@ zsh
 dash
 stow
 
+maim
 xwallpaper
 xdotool
 imagemagick
@@ -22,6 +23,7 @@ ttf-joypixels
 pulseaudio
 pamixer
 
+xclip
 xcape
 xcompmgr
 xorg-xset
