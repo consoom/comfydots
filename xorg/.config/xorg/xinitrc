@@ -4,4 +4,5 @@ remap &
 dwmblocks &
 unclutter &
 setwall $XDG_DATA_HOME/wallpapers/bg
+nvidia-settings -a '[fan:0]/GPUTargetFanSpeed=35'
 exec dwm
