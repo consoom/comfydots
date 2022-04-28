@@ -1,0 +1,39 @@
+#!/bin/sh
+
+# A script for setting *.mytheme files (example file in themes directory)
+# When given a *.mytheme file, it will set that theme, but when given
+# a directory, it will try to choose a random *.mytheme file in that
+# directory. If no argument is given, it will choose a random theme
+# out of the themes directory.
+
+themesdir=$(echo $HOME/.local/share/themes)
+wallprdir=$(echo $themesdir/wallpapers)
+
+settheme () {
+	if [ -z $1 ]; then exit 0; fi
+	wallpaper=$(sed -e "s/^.//" -e "1q;d" $1)
+	if [ ! -f $wallpaper ]; then wallpaper=$wallprdir/$wallpaper; fi
+	xwallpaper --zoom $wallpaper
+	xrdb $1 -merge | pidof dwm > /dev/null && xdotool key super+shift+F5
+	exit 1
+}
+
+randomtheme () {
+	settheme $(find $1 -maxdepth 1 -type f -name "*.mytheme" | shuf -n1)
+}
+
+if [ -z $1 ]; then
+	randomtheme $themesdir
+elif [ -f $1 ]; then
+	if echo $1 | grep -q .mytheme; then
+		settheme $1
+	fi
+	echo "No *.mytheme file given."
+	exit 0
+elif [ -d $1 ]; then
+	if [ "$(find $1 -maxdepth 1 -type f -name "*.mytheme")" != "" ]; then
+		randomtheme $1
+	fi
+	echo "No *.mytheme file found in $1."
+	exit 0
+fi
