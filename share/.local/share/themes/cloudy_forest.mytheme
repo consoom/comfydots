@@ -1,10 +1,10 @@
-!deep_forest.jpg
-dwm.normbgcolor: #312a04
-dwm.normbordercolor: #222707
-dwm.normfgcolor: #867503
-dwm.selbgcolor: #433e00
-dwm.selbordercolor: #8b7b01
-dwm.selfgcolor: #d7bf07
+!cloudy_forest.jpg
+dwm.normbgcolor: #2b2b2b
+dwm.normbordercolor: #454545
+dwm.normfgcolor: #d5d5d5
+dwm.selbgcolor: #857a80
+dwm.selbordercolor: #c9c9c9
+dwm.selfgcolor: #1a1a1a
 
 ! THIS IS A THEME FILE!
 ! I manage themes by having various 'theme files' in
