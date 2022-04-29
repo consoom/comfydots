@@ -32,4 +32,4 @@ I've also created a [configuration script](conf.sh), which on top of automatical
 To use it, you have to edit the script to change some parameters, like your desired username and language, and then run it inside of a freshly pacstrapped arch-chroot environment. It does not install any of my graphical programs for now.
 
 ## Screenshot
-![enter image description here](https://user-images.githubusercontent.com/33983173/145228579-5d7275a8-4b50-4494-a30e-66831c801044.png)
+![enter image description here](https://user-images.githubusercontent.com/33983173/166064884-fd3c6e0d-744d-4899-a680-dd997b72283b.png)
