@@ -31,7 +31,7 @@ elif [ -f $1 ]; then
 	echo "No *.mytheme file given."
 	exit 0
 elif [ -d $1 ]; then
-	if [ "$(find $1 -maxdepth 1 -type f -name "*.mytheme")" != "" ]; then
+	if [ "$(find -L $1 -maxdepth 1 -type f -name "*.mytheme")" != "" ]; then
 		randomtheme $1
 	fi
 	echo "No *.mytheme file found in $1."
