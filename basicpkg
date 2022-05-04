@@ -20,14 +20,15 @@ playerctl
 ttf-jetbrains-mono
 ttf-joypixels
 
-pulseaudio
+pipewire
+pipewire-pulse
+pulsemixer
 pamixer
 
 xclip
 xcape
 xcompmgr
 xorg-xset
-xorg-xsetroot
 xorg-xrandr
 xorg-server
 xorg-xinit
