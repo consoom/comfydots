@@ -13,6 +13,9 @@ esac
 
 vol="$(pamixer --get-volume)"
 
+if [ -z "$vol" ]; then
+	sleep 3 && vol="$(pamixer --get-volume)"
+fi
 if [ "$vol" -gt "70" ]; then
 	icon="🔊"
 elif [ "$vol" -lt "30" ]; then
