@@ -3,15 +3,15 @@
 # A dmenu wrapper script for power management related functions.
 
 case "$(readlink -f /sbin/init)" in
-	*systemd*) ctl='systemctl' ;;
-	*) ctl='loginctl' ;;
+        *systemd*) ctl='systemctl' ;;
+        *) ctl='loginctl' ;;
 esac
 
-case "$(printf "🖥 shutdown\n💤 sleep\n🔃 reboot\n🦔 hibernate\n📺 display off" | dmenu -i -p 'Action: ')" in
-	'🖥️shutdown') $ctl poweroff -i ;;
-	'💤 sleep') $ctl suspend -i ;;
-	'🔃 reboot') $ctl reboot -i ;;
-	'🦔 hibernate') $ctl hibernate -i ;;
-	'📺 display off') xset dpms force off ;;
-	*) exit 1 ;;
+case "$(printf "🖥 Shutdown\n💤 Sleep\n🔃 Reboot\n🦔 Hibernate\n📺 Display off" | dmenu -i -p 'Action: ' -l 5 -c -bw 4)" in
+        '🖥 Shutdown') $ctl poweroff -i ;;
+        '💤 Sleep') $ctl suspend -i ;;
+        '🔃 Reboot') $ctl reboot -i ;;
+        '🦔 Hibernate') $ctl hibernate -i ;;
+        '📺 Display off') xset dpms force off ;;
+        *) exit 1 ;;
 esac

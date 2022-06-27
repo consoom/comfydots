@@ -1,10 +1,10 @@
 !cloudy_forest.jpg
-dwm.normbgcolor: #2b2b2b
-dwm.normbordercolor: #454545
-dwm.normfgcolor: #d5d5d5
-dwm.selbgcolor: #857a80
-dwm.selbordercolor: #c9c9c9
-dwm.selfgcolor: #1a1a1a
+*.normbgcolor: #2b2b2b
+*.normbordercolor: #454545
+*.normfgcolor: #d5d5d5
+*.selbgcolor: #857a80
+*.selbordercolor: #c9c9c9
+*.selfgcolor: #1a1a1a
 
 ! THIS IS A THEME FILE!
 ! I manage themes by having various 'theme files' in
@@ -13,4 +13,4 @@ dwm.selfgcolor: #1a1a1a
 ! of the lines being used to change the colors of dwm.
 ! This file is supposed to be interpreted by my 'settheme' script.
 ! Insert one exclamation mark on the first line so it will be
-! ignored by xrdb, the tool responsible for loading the colors. 
+! ignored by xrdb, the tool responsible for loading the colors.
