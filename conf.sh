@@ -32,20 +32,10 @@ archchrootsetup () {
 	done
 
 	# Configure time, locale etc.
-	timedatectl set-ntp true
 	ln -sf ${timezn} /etc/localtime
+	timedatectl set-ntp true
 	hwclock --systohc
-	echo -e "LANG=${locale}\n" >> /etc/locale.conf
-	echo -e "LC_CTYPE=${locale}\n" >> /etc/locale.conf
-	echo -e "LC_ADDRESS=${locale}\n" >> /etc/locale.conf
-	echo -e "LC_IDENTIFICATION=${locale}\n" >> /etc/locale.conf
-	echo -e "LC_MEASUREMENT=${locale}\n" >> /etc/locale.conf
-	echo -e "LC_MONETARY=${locale}\n" >> /etc/locale.conf
-	echo -e "LC_NAME=${locale}\n" >> /etc/locale.conf
-	echo -e "LC_NUMERIC=${locale}\n" >> /etc/locale.conf
-	echo -e "LC_PAPER=${locale}\n" >> /etc/locale.conf
-	echo -e "LC_TELEPHONE=${locale}\n" >> /etc/locale.conf
-	echo "LC_TIME=${locale}" >> /etc/locale.conf
+	echo -e "LANG=${locale}\n" >/etc/locale.conf
 	(cat /etc/locale.gen | grep -q "#${locale}") && sed -i "/#${locale}/s/^#//g" /etc/locale.gen && locale-gen
 
 	# Installing programs that are necessary for other programs to work
