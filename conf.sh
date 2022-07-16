@@ -28,13 +28,28 @@ archchrootsetup () {
         		* ) echo "Please answer with yes or no.";;
     		esac
 	done
+	cd ~
 
 	# Configure time, locale etc.
 	timedatectl set-ntp true
 	ln -sf ${timezn} /etc/localtime
 	hwclock --systohc
-	echo "LANG=${locale}" > /etc/locale.conf
+	echo -e "LANG=${locale}\n" >> /etc/locale.conf
+	echo -e "LC_CTYPE=${locale}\n" >> /etc/locale.conf
+	echo -e "LC_ADDRESS=${locale}\n" >> /etc/locale.conf
+	echo -e "LC_IDENTIFICATION=${locale}\n" >> /etc/locale.conf
+	echo -e "LC_MEASUREMENT=${locale}\n" >> /etc/locale.conf
+	echo -e "LC_MONETARY=${locale}\n" >> /etc/locale.conf
+	echo -e "LC_NAME=${locale}\n" >> /etc/locale.conf
+	echo -e "LC_NUMERIC=${locale}\n" >> /etc/locale.conf
+	echo -e "LC_PAPER=${locale}\n" >> /etc/locale.conf
+	echo -e "LC_TELEPHONE=${locale}\n" >> /etc/locale.conf
+	echo "LC_TIME=${locale}" >> /etc/locale.conf
 	(cat /etc/locale.gen | grep -q "#${locale}") && sed -i "/#${locale}/s/^#//g" /etc/locale.gen && locale-gen
+
+	# Installing programs that are necessary for other programs to work
+	pacman --noconfirm -S archlinux-keyring
+	pacman --noconfirm --needed -S ca-certificates base-devel git zsh
 
 	# Setting hostname
 	echo ${hostnm} > /etc/hostname
@@ -46,15 +61,54 @@ archchrootsetup () {
 
 	# Adding a simple user
 	useradd -m -G wheel -s /bin/zsh ${usernm}
-	
-	# Installing basic packages
-	pacman -S --noconfirm --needed $(cat basicpkg)
+	export repodir="/home/$usernm/.local/src"
+	mkdir -p "$repodir"
+	chown -R "$usernm": "$(dirname "$repodir")"
 
-	# Giving the wheel group sudo privileges (without password, insecure!)
-	sed -i "/# %wheel ALL=(ALL) NOPASSWD/s/^# //g" /etc/sudoers
+	# Giving the wheel group sudo privileges (some commands without password)
+	echo "%wheel ALL=(ALL) ALL" >/etc/sudoers.d/wheel_sudo
+	echo "%wheel ALL=(ALL) NOPASSWD: /usr/bin/shutdown,/usr/bin/reboot,/usr/bin/systemctl suspend,/usr/bin/mount,/usr/bin/umount,/usr/bin/pacman -Syu,/usr/bin/pacman -Syyu,/usr/bin/pacman -Syyu --noconfirm,/usr/bin/loadkeys,/usr/bin/paru,/usr/bin/pacman -Syyuw --noconfirm" >/etc/sudoers.d/wheel_cmds_without_password
 
-	# Adding colors to pacman
-	grep -q "^Color" /etc/pacman.conf || sed -i "s/^#Color$/Color/" /etc/pacman.conf
+	# Adding colors and concurrent downloads to Pacman
+	grep -q "ILoveCandy" /etc/pacman.conf || sed -i "/#VerbosePkgLists/a ILoveCandy" /etc/pacman.conf
+	sed -Ei "s/^#(ParallelDownloads).*/\1 = 5/;/^#Color$/s/#//" /etc/pacman.conf
+
+	# Use all cores for compilation.
+	sed -i "s/-j2/-j$(nproc)/;/^#MAKEFLAGS/s/^#//" /etc/makepkg.conf
+
+        # Installing paru - AUR helper
+        git clone --depth 1 --single-branch --no-tags "https://aur.archlinux.org/paru-bin.git"
+        cd paru-bin
+        makepkg --noconfirm -si
+        cd ..; rm -rf paru-bin
+
+	# Installing all packages
+	sed '1d' packages.csv > packages_temp.csv
+	while IFS=, read -r type program comment; do
+        	case "$type" in
+        	"A") aurpackages=$(echo "$aurpackages $program") ;;
+        	"G") gitpackages=$(echo "$gitpackages $program") ;;
+        	*) mainpackages=$(echo "$mainpackages $program") ;;
+        	esac
+	done <packages_temp.csv
+	[ -z "$mainpackages" ] || pacman --noconfirm --needed -S $(echo "${mainpackages#?}")
+	[ -z "$aurpackages" ] || sudo -u "$usernm" paru -S --noconfirm $(echo "${aurpackages#?}")
+	for url in ${gitpackages#?}
+	do
+        	progname="${url##*/}"
+        	progname="${progname%.git}"
+        	dir="$repodir/$progname"
+        	git -C "$repodir" clone --depth 1 --single-branch \
+                	--no-tags "$url" "$dir"
+        	cd $dir
+        	make clean install
+        	cd ~
+	done
+	rm packages_temp.csv
+
+	# Manually installing libxft-git for color emoji support in suckless software (hopefully soon to be merged in main arch repo)
+	pacman -Qs libxft-git ||
+	yes | sudo -u "$usernm" paru -S libxft-git
 
 	# Disabling annoying system beep sound
 	echo "blacklist pcspkr" > /etc/modprobe.d/nobeep.conf ;
@@ -81,15 +135,6 @@ postsetup () {
 
 	# Symlink .zprofile in ~ to ~/.config/shell/profile
 	ln -sf /home/$USER/.config/shell/profile /home/$USER/.zprofile
-
-        # Installing paru - AUR helper
-        git clone https://aur.archlinux.org/paru.git
-        cd paru
-        makepkg --noconfirm -si
-        cd ..; rm -rf paru
-
-	# Installing AUR packages
-	paru -S --noconfirm --needed $(cat aurpkg)
 
 	# Finalizing
 	echo -e "\n---\nEnd of script reached. Please set passwords for both the root account and $USER:"

@@ -1,0 +1,32 @@
+Type,Name in repo(or git URL),Purpose
+,xorg-server
+,xorg-xinit
+,xcompmgr
+,xwallpaper
+,xcape
+,xclip
+,xdotool
+,polkit
+A,zsh-fast-syntax-highlighting-git
+,ttf-joypixels
+,ttf-jetbrains-mono
+,pipewire
+,pipewire-pulse
+,pulsemixer
+,pamixer
+,playerctl
+,unclutter
+,maim
+,p7zip
+A,brave-bin
+,networkmanager
+A,dashbinsh
+,dash
+,stow
+,neovim
+A,xidlehook,can start programs at inactivity of the X Window Display.
+A,sct,sets the screen color temperature.
+G,https://github.com/consoom/dwm
+G,https://github.com/consoom/dmenu
+G,https://github.com/consoom/dwmblocks
+G,https://github.com/consoom/st
