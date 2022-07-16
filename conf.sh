@@ -55,6 +55,7 @@ archchrootsetup () {
 	export repodir="/home/$usernm/.local/src"
 	mkdir -p "$repodir"
 	chown -R "$usernm": "$(dirname "$repodir")"
+	sudo -u "$usernm" mkdir -p "/home/$usernm/.cache/zsh/"
 
 	# Adding colors and concurrent downloads to Pacman
 	grep -q "ILoveCandy" /etc/pacman.conf || sed -i "/#VerbosePkgLists/a ILoveCandy" /etc/pacman.conf
