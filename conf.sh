@@ -28,7 +28,6 @@ archchrootsetup () {
         		* ) echo "Please answer with yes or no.";;
     		esac
 	done
-	cd ~
 
 	# Configure time, locale etc.
 	timedatectl set-ntp true
@@ -80,7 +79,7 @@ archchrootsetup () {
 	echo "blacklist pcspkr" > /etc/modprobe.d/nobeep.conf ;
 
         # Installing paru - AUR helper
-	mkdir home/build
+	mkdir /home/build
 	chgrp nobody /home/build
 	chmod g+ws /home/build
 	setfacl -m u::rwx,g::rwx /home/build
@@ -90,7 +89,7 @@ archchrootsetup () {
 	sudo -u nobody -D "/home/build" makepkg
 	pacman --noconfirm -U paru-bin*.zst
         rm -rf /home/build
-	cd /
+	cd /comfydots
 
 	# Installing all packages
 	sed '1d' packages.csv > packages_temp.csv
@@ -112,7 +111,7 @@ archchrootsetup () {
                 	--no-tags "$url" "$dir"
         	cd $dir
         	make clean install
-        	cd /
+        	cd /comfydots
 	done
 	rm packages_temp.csv
 
@@ -128,7 +127,7 @@ postsetup () {
 	cd /home/$USER/.local/share/comfydots/
 
 	# Manually installing libxft-git for color emoji support in suckless software (hopefully soon to be merged in main arch repo)
-	yes | paru -S libxft-git
+	# yes | paru -S libxft-git
 
 	# Stowing dotfiles
 	stow --target=/home/$USER/ --no-folding scripts 
