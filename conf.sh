@@ -107,7 +107,7 @@ archchrootsetup () {
         	esac
 	done <packages_temp.csv
 	[ -z "$mainpackages" ] || pacman --noconfirm --needed -S $(echo "${mainpackages#?}")
-	[ -z "$aurpackages" ] || sudo -u "$usernm" paru -S --noconfirm $(echo "${aurpackages#?}")
+	[ -z "$aurpackages" ] || sudo -u yes | "$usernm" paru -S $(echo "${aurpackages#?}")
 	for url in ${gitpackages#?}
 	do
         	progname="${url##*/}"
