@@ -64,10 +64,6 @@ archchrootsetup () {
 	mkdir -p "$repodir"
 	chown -R "$usernm": "$(dirname "$repodir")"
 
-	# Giving the wheel group sudo privileges (some commands without password)
-	echo "%wheel ALL=(ALL) ALL" >/etc/sudoers.d/wheel_sudo
-	echo "%wheel ALL=(ALL) NOPASSWD: /usr/bin/shutdown,/usr/bin/reboot,/usr/bin/systemctl suspend,/usr/bin/mount,/usr/bin/umount,/usr/bin/pacman -Syu,/usr/bin/pacman -Syyu,/usr/bin/pacman -Syyu --noconfirm,/usr/bin/loadkeys,/usr/bin/paru,/usr/bin/pacman -Syyuw --noconfirm" >/etc/sudoers.d/wheel_cmds_without_password
-
 	# Adding colors and concurrent downloads to Pacman
 	grep -q "ILoveCandy" /etc/pacman.conf || sed -i "/#VerbosePkgLists/a ILoveCandy" /etc/pacman.conf
 	sed -Ei "s/^#(ParallelDownloads).*/\1 = 5/;/^#Color$/s/#//" /etc/pacman.conf
@@ -107,7 +103,13 @@ archchrootsetup () {
         	esac
 	done <packages_temp.csv
 	[ -z "$mainpackages" ] || pacman --noconfirm --needed -S $(echo "${mainpackages#?}")
-	[ -z "$aurpackages" ] || sudo -u "$usernm" yes | paru -S $(echo "${aurpackages#?}")
+	[ -z "$aurpackages" ] || sudo -u "$usernm" paru -S --noconfirm $(echo "${aurpackages#?}")
+	
+	# (HOPEFULLY TEMPORARY ADDITION!)
+	# libxft-git has colored emoji support for suckless software that lacks in the stable libxft package,
+	# which has to be installed explicitly for now to avoid package conflict errors.
+	sudo -u "$usernm" paru -S --noconfirm libxft-git
+	
 	for url in ${gitpackages#?}
 	do
         	progname="${url##*/}"
@@ -121,6 +123,10 @@ archchrootsetup () {
 	done
 	rm packages_temp.csv
 
+	# Giving the wheel group sudo privileges (some commands without password)
+	echo "%wheel ALL=(ALL) ALL" >/etc/sudoers.d/wheel_sudo
+	echo "%wheel ALL=(ALL) NOPASSWD: /usr/bin/shutdown,/usr/bin/reboot,/usr/bin/systemctl suspend,/usr/bin/mount,/usr/bin/umount,/usr/bin/pacman -Syu,/usr/bin/pacman -Syyu,/usr/bin/pacman -Syyu --noconfirm,/usr/bin/loadkeys,/usr/bin/paru,/usr/bin/pacman -Syyuw --noconfirm" >/etc/sudoers.d/wheel_cmds_without_password
+
 	# Cloning this repo inside of the home folder of the new user
 	dotfilesdir=/home/${usernm}/.local/share/comfydots
 	su -c "mkdir -p ${dotfilesdir}" ${usernm}
@@ -131,9 +137,6 @@ archchrootsetup () {
 
 postsetup () {
 	cd /home/$USER/.local/share/comfydots/
-
-	# Manually installing libxft-git for color emoji support in suckless software (hopefully soon to be merged in main arch repo)
-	# yes | paru -S libxft-git
 
 	# Stowing dotfiles
 	stow --target=/home/$USER/ --no-folding scripts 
@@ -146,9 +149,8 @@ postsetup () {
 	ln -sf /home/$USER/.config/shell/profile /home/$USER/.zprofile
 
 	# Finalizing
-	echo -e "\n---\nEnd of script reached. Please set passwords for both the root account and $USER:"
-	echo "(as root) passwd"
-	echo "(as root) passwd $USER"
+	echo -e "\n---\nEnd of script reached. Please set a password for $USER:"
+	echo "(as root): $ passwd $USER"
 }
 
 [ "$1" == "postsetup" ] || archchrootsetup
