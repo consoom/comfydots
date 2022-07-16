@@ -92,6 +92,12 @@ archchrootsetup () {
 	cd /comfydots
 
 	# Installing all packages
+	
+	# Allow user to run sudo without password. Since AUR programs must be installed
+	# in a fakeroot environment, this is required for all builds with AUR.
+	trap 'rm -f /etc/sudoers.d/temp' HUP INT QUIT TERM PWR EXIT
+	echo "%wheel ALL=(ALL) NOPASSWD: ALL" >/etc/sudoers.d/temp
+	
 	sed '1d' packages.csv > packages_temp.csv
 	while IFS=, read -r type program comment; do
         	case "$type" in
