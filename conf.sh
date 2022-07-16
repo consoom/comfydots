@@ -76,11 +76,15 @@ archchrootsetup () {
 	# Use all cores for compilation.
 	sed -i "s/-j2/-j$(nproc)/;/^#MAKEFLAGS/s/^#//" /etc/makepkg.conf
 
+	# Disabling annoying system beep sound
+	echo "blacklist pcspkr" > /etc/modprobe.d/nobeep.conf ;
+
         # Installing paru - AUR helper
         git clone --depth 1 --single-branch --no-tags "https://aur.archlinux.org/paru-bin.git"
         cd paru-bin
-        makepkg --noconfirm -si
+	sudo -u "$usernm" makepkg --noconfirm -si
         cd ..; rm -rf paru-bin
+	cd ~
 
 	# Installing all packages
 	sed '1d' packages.csv > packages_temp.csv
@@ -106,16 +110,6 @@ archchrootsetup () {
 	done
 	rm packages_temp.csv
 
-	# Manually installing libxft-git for color emoji support in suckless software (hopefully soon to be merged in main arch repo)
-	pacman -Qs libxft-git ||
-	yes | sudo -u "$usernm" paru -S libxft-git
-
-	# Disabling annoying system beep sound
-	echo "blacklist pcspkr" > /etc/modprobe.d/nobeep.conf ;
-
-	# Enabling daemons
-	systemctl enable NetworkManager
-
 	# Cloning this repo inside of the home folder of the new user
 	dotfilesdir=/home/${usernm}/.local/share/comfydots
 	su -c "mkdir -p ${dotfilesdir}" ${usernm}
@@ -126,6 +120,10 @@ archchrootsetup () {
 
 postsetup () {
 	cd /home/$USER/.local/share/comfydots/
+
+	# Manually installing libxft-git for color emoji support in suckless software (hopefully soon to be merged in main arch repo)
+	yes | paru -S libxft-git
+
 	# Stowing dotfiles
 	stow --target=/home/$USER/ --no-folding scripts 
 	stow --target=/home/$USER/ --no-folding share
