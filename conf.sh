@@ -126,8 +126,8 @@ archchrootsetup () {
 	rm packages_temp.csv
 
 	# Giving the wheel group sudo privileges (some commands without password)
-	echo "%wheel ALL=(ALL) ALL" >/etc/sudoers.d/wheel_sudo
-	echo "%wheel ALL=(ALL) NOPASSWD: /usr/bin/shutdown,/usr/bin/reboot,/usr/bin/systemctl suspend,/usr/bin/mount,/usr/bin/umount,/usr/bin/pacman -Syu,/usr/bin/pacman -Syyu,/usr/bin/pacman -Syyu --noconfirm,/usr/bin/loadkeys,/usr/bin/paru,/usr/bin/pacman -Syyuw --noconfirm" >/etc/sudoers.d/wheel_cmds_without_password
+	echo "%wheel ALL=(ALL) ALL" >/etc/sudoers.d/wheel_group
+	echo "%wheel ALL=(ALL) NOPASSWD: /usr/bin/shutdown,/usr/bin/reboot,/usr/bin/systemctl suspend,/usr/bin/mount,/usr/bin/umount,/usr/bin/pacman -Syu,/usr/bin/pacman -Syyu,/usr/bin/pacman -Syyu --noconfirm,/usr/bin/loadkeys,/usr/bin/paru,/usr/bin/pacman -Syyuw --noconfirm" >>/etc/sudoers.d/wheel_group
 
 	# Cloning this repo inside of the home folder of the new user
 	dotfilesdir=/home/${usernm}/.local/share/comfydots
