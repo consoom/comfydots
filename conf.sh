@@ -89,6 +89,7 @@ archchrootsetup () {
 		--no-tags "https://aur.archlinux.org/paru-bin.git" "$repodir/paru"
 	cd "$repodir/paru"
 	sudo -u "$usernm" -D "$repodir/paru" makepkg --noconfirm -si
+	cd /comfydots
 
 	# Installing all packages
 	
