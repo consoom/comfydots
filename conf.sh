@@ -80,11 +80,12 @@ archchrootsetup () {
 	echo "blacklist pcspkr" > /etc/modprobe.d/nobeep.conf ;
 
         # Installing paru - AUR helper
-        git clone --depth 1 --single-branch --no-tags "https://aur.archlinux.org/paru-bin.git"
-        cd paru-bin
-	sudo -u "$usernm" makepkg --noconfirm -si
+	sudo -u "$usernm" mkdir -p "$repodir/paru-bin"
+        git clone --depth 1 --single-branch --no-tags "https://aur.archlinux.org/paru-bin.git" "$repodir/paru-bin"
+        cd "$repodir/paru-bin"
+	sudo -u "$usernm" -D "$repodir/paru-bin" makepkg --noconfirm -si
         cd ..; rm -rf paru-bin
-	cd ~
+	cd /
 
 	# Installing all packages
 	sed '1d' packages.csv > packages_temp.csv
@@ -102,11 +103,11 @@ archchrootsetup () {
         	progname="${url##*/}"
         	progname="${progname%.git}"
         	dir="$repodir/$progname"
-        	git -C "$repodir" clone --depth 1 --single-branch \
+        	sudo -u "$usernm" git -C "$repodir" clone --depth 1 --single-branch \
                 	--no-tags "$url" "$dir"
         	cd $dir
         	make clean install
-        	cd ~
+        	cd /
 	done
 	rm packages_temp.csv
 
