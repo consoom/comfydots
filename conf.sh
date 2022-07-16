@@ -80,11 +80,16 @@ archchrootsetup () {
 	echo "blacklist pcspkr" > /etc/modprobe.d/nobeep.conf ;
 
         # Installing paru - AUR helper
-	sudo -u "$usernm" mkdir -p "$repodir/paru-bin"
-        git clone --depth 1 --single-branch --no-tags "https://aur.archlinux.org/paru-bin.git" "$repodir/paru-bin"
-        cd "$repodir/paru-bin"
-	sudo -u "$usernm" -D "$repodir/paru-bin" makepkg --noconfirm -si
-        cd ..; rm -rf paru-bin
+	mkdir home/build
+	chgrp nobody /home/build
+	chmod g+ws /home/build
+	setfacl -m u::rwx,g::rwx /home/build
+	setfacl -d --set u::rwx,g::rwx,o::- /home/build
+        git clone --depth 1 --single-branch --no-tags "https://aur.archlinux.org/paru-bin.git" "/home/build"
+        cd "/home/build"
+	sudo -u nobody -D "/home/build" makepkg
+	pacman --noconfirm -U paru-bin*.zst
+        rm -rf /home/build
 	cd /
 
 	# Installing all packages
