@@ -66,25 +66,31 @@ archchrootsetup () {
 	# Disabling annoying system beep sound
 	echo "blacklist pcspkr" > /etc/modprobe.d/nobeep.conf ;
 
-        # Installing paru - AUR helper
-	mkdir /home/build
-	chgrp nobody /home/build
-	chmod g+ws /home/build
-	setfacl -m u::rwx,g::rwx /home/build
-	setfacl -d --set u::rwx,g::rwx,o::- /home/build
-        git clone --depth 1 --single-branch --no-tags "https://aur.archlinux.org/paru-bin.git" "/home/build"
-        cd "/home/build"
-	sudo -u nobody -D "/home/build" makepkg
-	pacman --noconfirm -U paru-bin*.zst
-        rm -rf /home/build
-	cd /comfydots
-
-	# Installing all packages
-	
-	# Allow user to run sudo without password. Since AUR programs must be installed
+	# Allow user to run sudo without password temporary. Since AUR programs must be installed
 	# in a fakeroot environment, this is required for all builds with AUR.
 	trap 'rm -f /etc/sudoers.d/temp' HUP INT QUIT TERM PWR EXIT
 	echo "%wheel ALL=(ALL) NOPASSWD: ALL" >/etc/sudoers.d/temp
+
+        # Installing paru - AUR helper
+	#mkdir /home/build
+	#chgrp nobody /home/build
+	#chmod g+ws /home/build
+	#setfacl -m u::rwx,g::rwx /home/build
+	#setfacl -d --set u::rwx,g::rwx,o::- /home/build
+        #git clone --depth 1 --single-branch --no-tags "https://aur.archlinux.org/paru-bin.git" "/home/build"
+        #cd "/home/build"
+	#sudo -u nobody -D "/home/build" makepkg
+	#pacman --noconfirm -U paru-bin*.zst
+        #rm -rf /home/build
+	#cd /comfydots
+	
+	sudo -u "$usernm" mkdir -p "$repodir/paru"
+	sudo -u "$usernm" git -C "$repodir" clone --depth 1 --single-branch \
+		--no-tags "https://aur.archlinux.org/paru-bin.git" "$repodir/paru"
+	cd "$repodir/paru"
+	sudo -u "$usernm" -D "$repodir/paru" makepkg --noconfirm -si
+
+	# Installing all packages
 	
 	sed '1d' packages.csv > packages_temp.csv
 	while IFS=, read -r type program comment; do
