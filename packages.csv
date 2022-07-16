@@ -10,6 +10,7 @@ Type,Name in repo(or git URL),Purpose
 A,zsh-fast-syntax-highlighting-git,
 ,ttf-joypixels,
 ,ttf-jetbrains-mono,
+,noto-fonts,
 ,pipewire,
 ,pipewire-pulse,
 ,pulsemixer,
