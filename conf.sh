@@ -9,10 +9,12 @@ usernm=joe
 locale=en_US.UTF-8
 timezn=/usr/share/zoneinfo/Europe/Amsterdam
 
+[ -d "/comfydots" ] || echo "Please move this repository to / first."
+
 archchrootsetup () {
 	# Install prompt
 	echo -e "\nYou are about to setup a basic system (set timezone, install packages, create a new user, etc.)"
-	echo "This script will NOT handle bootloaders or fstab - as that differs from scenario."
+	echo "This script will NOT handle stuff like bootloaders, (network) deamons or fstab - as that differs from scenario."
 	echo "Please make sure you are running this inside of a fresh Arch Linux installation as root."
 	echo -e "After the script has finished, you may delete this repo in this current directory.\n"
 	echo "--- Current settings: (edit in script)"
@@ -108,7 +110,7 @@ archchrootsetup () {
 	# (HOPEFULLY TEMPORARY ADDITION!)
 	# libxft-git has colored emoji support for suckless software that lacks in the stable libxft package,
 	# which has to be installed explicitly for now to avoid package conflict errors.
-	sudo -u "$usernm" paru -S --noconfirm libxft-git
+	sudo -u "$usernm" sh -c "yes | paru -S --skippreview libxft-git"
 	
 	for url in ${gitpackages#?}
 	do
