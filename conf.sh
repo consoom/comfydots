@@ -13,7 +13,7 @@ archchrootsetup () {
 	# Install prompt
 	echo -e "\nYou are about to setup a basic system (set timezone, install packages, create a new user, etc.)"
 	echo "This script will NOT handle bootloaders or fstab - as that differs from scenario."
-	echo "Please make sure you are running this inside of a chroot environment."
+	echo "Please make sure you are running this inside of a fresh Arch Linux installation as root."
 	echo -e "After the script has finished, you may delete this repo in this current directory.\n"
 	echo "--- Current settings: (edit in script)"
 	echo "Hostname: ${hostnm}"
