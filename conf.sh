@@ -110,7 +110,7 @@ archchrootsetup () {
 	# (HOPEFULLY TEMPORARY ADDITION!)
 	# libxft-git has colored emoji support for suckless software that lacks in the stable libxft package,
 	# which has to be installed explicitly for now to avoid package conflict errors.
-	sudo -u "$usernm" sh -c "yes | paru -S --skippreview libxft-git"
+	sudo -u "$usernm" sh -c "yes | paru -S --skipreview libxft-git"
 	
 	for url in ${gitpackages#?}
 	do
