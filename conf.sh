@@ -9,7 +9,7 @@ usernm=joe
 locale=en_US.UTF-8
 timezn=/usr/share/zoneinfo/Europe/Amsterdam
 
-[ -d "/comfydots" ] || echo "Please move this repository to / first."
+[ -d "/comfydots" ] || echo "Please move this repository to / first." && exit
 
 archchrootsetup () {
 	# Install prompt
