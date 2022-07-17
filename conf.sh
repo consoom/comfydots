@@ -144,6 +144,7 @@ postsetup () {
 	stow --target=/home/$USER/ --no-folding shell
 	stow --target=/home/$USER/ --no-folding xorg
 	stow --target=/home/$USER/ --no-folding zsh
+	stow --target=/home/$USER/ --no-folding fontconfig
 
 	# Symlink .zprofile in ~ to ~/.config/shell/profile
 	ln -sf /home/$USER/.config/shell/profile /home/$USER/.zprofile
