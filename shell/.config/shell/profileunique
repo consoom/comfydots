@@ -1,0 +1,4 @@
+#!/bin/sh
+
+# shell profile, but changes get ignored by the comfydots repository.
+# useful for running commands at startup unique per installation.

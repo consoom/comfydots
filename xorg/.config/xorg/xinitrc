@@ -9,4 +9,5 @@ xidlehook --not-when-audio --timer 900 'case "$(readlink -f
         *systemd*) systemctl suspend ;;
         *) loginctl suspend ;;
 esac' '' &
+sh ~/.config/xorg/xinitrcunique
 exec dwm
