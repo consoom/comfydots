@@ -29,7 +29,7 @@ For example, to install my zsh configuration, run: `$ stow --target=/home/$USER/
 You can also delete it by running: `$ stow --target=/home/$USER/ -D zsh`.
 To learn more about stow, you could for example read [this article](https://web.archive.org/web/20210515192752/https://alexpearce.me/2016/02/managing-dotfiles-with-stow/).
 
-Some files you might want to modify without them being tagged as modified by Git, because they are dependent on and unique to the machine you're using, such as your xinitrc file that executes programs that rely on certain hardware (e.g. scripts that modify videocard behaviour). For this reason I've added a [xinitrcunique](https://github.com/consoom/comfydots/blob/main/xorg/.config/xorg/xinitrcunique) and [profileunique](https://github.com/consoom/comfydots/blob/main/shell/.config/shell/profileunique) file that may be edited without being updated on the repository.
+You might want to modify some files without them being tagged as modified by Git, because they are dependent on and unique to the machine you're using, such as your xinitrc file that executes programs that rely on certain hardware (e.g. scripts that modify videocard behaviour). For this reason I've added a [xinitrcunique](https://github.com/consoom/comfydots/blob/main/xorg/.config/xorg/xinitrcunique) and [profileunique](https://github.com/consoom/comfydots/blob/main/shell/.config/shell/profileunique) file that may be edited without being updated on the repository.
 To exclude these files from showing up in your Git index, run `$ git update-index --skip-worktree <location of machine unique file>`
 
 ## Configuration script
