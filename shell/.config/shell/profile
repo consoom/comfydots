@@ -22,7 +22,7 @@ export CARGO_HOME="${XDG_DATA_HOME:-$HOME/.local/share}/cargo"
 export LESSHISTFILE="-"
 
 # Open installation-unique programs
-sh $HOME/.config/profileunique
+sh $HOME/.config/shell/profileunique
 
 # Start a X.org server
 [ "$(tty)" = "/dev/tty1" ] && ! pidof -s Xorg >/dev/null 2>&1 && exec startx "$XINITRC"
