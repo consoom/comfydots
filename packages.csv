@@ -1,6 +1,7 @@
 Type,Name in repo(or git URL),Purpose
 ,xorg-server,
 ,xorg-xinit,
+,libxft,
 ,xcompmgr,
 ,xwallpaper,
 ,xcape,

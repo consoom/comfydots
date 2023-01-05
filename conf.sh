@@ -105,11 +105,6 @@ archchrootsetup () {
 	[ -z "$mainpackages" ] || pacman --noconfirm --needed -S $(echo "${mainpackages#?}")
 	[ -z "$aurpackages" ] || sudo -u "$usernm" paru -S --noconfirm $(echo "${aurpackages#?}")
 	
-	# (HOPEFULLY TEMPORARY ADDITION!)
-	# libxft-git has colored emoji support for suckless software that lacks in the stable libxft package,
-	# which has to be installed explicitly for now to avoid package conflict errors.
-	sudo -u "$usernm" sh -c "yes | paru -S --skipreview libxft-git"
-	
 	for url in ${gitpackages#?}
 	do
         	progname="${url##*/}"
