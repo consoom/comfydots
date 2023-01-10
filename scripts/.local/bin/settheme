@@ -14,7 +14,7 @@ settheme () {
 	wallpaper=$(sed -e "s/^.//" -e "1q;d" $1)
 	if [ ! -f $wallpaper ]; then wallpaper=$wallprdir/$wallpaper; fi
 	xwallpaper --zoom $wallpaper
-	xrdb $1 -merge | pidof dwm > /dev/null && xdotool key super+shift+F5
+	cat $HOME/.config/xorg/Xresources $1 | xrdb -merge | pidof dwm > /dev/null && xdotool key super+shift+F5
 	exit 1
 }
 
