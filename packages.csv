@@ -12,6 +12,7 @@ Type,Name in repo(or git URL),Purpose
 A,zsh-fast-syntax-highlighting-git,
 ,ttf-joypixels,
 ,ttf-jetbrains-mono,
+,ttf-font-awesome,
 ,noto-fonts,
 ,pipewire,
 ,pipewire-pulse,
