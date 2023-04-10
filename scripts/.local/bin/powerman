@@ -7,7 +7,7 @@ case "$(readlink -f /sbin/init)" in
         *) ctl='loginctl' ;;
 esac
 
-case "$(printf "🖥 Shutdown\n💤 Sleep\n🔃 Reboot\n🦔 Hibernate\n📺 Display off" | dmenu -i -p 'Action: ' -l 5 -c -bw 4)" in
+case "$(printf "🖥 Shutdown\n💤 Sleep\n🔃 Reboot\n🦔 Hibernate\n📺 Display off" | dmenu -i -l 5 -c -bw 4)" in
         '🖥 Shutdown') $ctl poweroff -i ;;
         '💤 Sleep') $ctl suspend -i ;;
         '🔃 Reboot') $ctl reboot -i ;;
