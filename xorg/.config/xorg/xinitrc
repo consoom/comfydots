@@ -4,5 +4,4 @@ dwmblocks &
 unclutter &
 settheme &
 xidlehook --not-when-audio --timer 900 'case "$(readlink -f /sbin/init)" in *systemd*) systemctl suspend ;; *) loginctl suspend ;; esac' '' &
-sh ~/.config/xorg/xinitrcunique &
 exec dwm

@@ -1,5 +1,0 @@
-#!/bin/sh
-
-# xinitrc, but changes get ignored by the comfydots repository.
-# useful for starting graphical programs and tools that are
-# unique per installation.
