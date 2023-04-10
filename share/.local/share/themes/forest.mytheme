@@ -1,0 +1,50 @@
+!forest.jpeg
+*.normbgcolor: #070603
+*.normbordercolor: #454545
+*.normfgcolor: #6a6e71
+*.selbgcolor: #303443
+*.selbordercolor: #c9c9c9
+*.selfgcolor: #efe8d1
+
+dwm.color0:       #2b303b
+dwm.color8:       #65737e
+dwm.color1:       #bf616a
+dwm.color9:       #bf616a
+dwm.color2:       #a3be8c
+dwm.color10:      #a3be8c
+dwm.color3:       #ebcb8b
+dwm.color11:      #ebcb8b
+dwm.color4:       #8fa1b3
+dwm.color12:      #8fa1b3
+dwm.color5:       #b48ead
+dwm.color13:      #b48ead
+dwm.color6:       #96b5b4
+dwm.color14:      #96b5b4
+dwm.color7:       #c0c5ce
+dwm.color15:      #eff1f5
+
+st.color0:       #2b303b
+st.color8:       #65737e
+st.color1:       #bf616a
+st.color9:       #bf616a
+st.color2:       #a3be8c
+st.color10:      #a3be8c
+st.color3:       #ebcb8b
+st.color11:      #ebcb8b
+st.color4:       #8fa1b3
+st.color12:      #8fa1b3
+st.color5:       #b48ead
+st.color13:      #b48ead
+st.color6:       #96b5b4
+st.color14:      #96b5b4
+st.color7:       #c0c5ce
+st.color15:      #eff1f5
+
+! THIS IS A THEME FILE!
+! I manage themes by having various 'theme files' in
+! this format, which consists out of a filename referring
+! to a background image on the first line, and the rest
+! of the lines being used to change the colors of dwm.
+! This file is supposed to be interpreted by my 'settheme' script.
+! Insert one exclamation mark on the first line so it will be
+! ignored by xrdb, the tool responsible for loading the colors.
