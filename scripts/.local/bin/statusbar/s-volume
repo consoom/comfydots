@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# Prints the current volume.
+# Prints the current volume or 🔇 if muted.
 
 case $BLOCK_BUTTON in
 	1) xdotool key super+XF86_AudioMute ;;
@@ -9,7 +9,7 @@ case $BLOCK_BUTTON in
 	5) pamixer -d 1 ;;
 esac
 
-[ $(pamixer --get-mute) = true ] && display  && exit
+[ $(pamixer --get-mute) = true ] && echo 🔇 && exit
 
 vol="$(pamixer --get-volume)"
 
@@ -17,11 +17,11 @@ if [ -z "$vol" ]; then
 	sleep 3 && vol="$(pamixer --get-volume)"
 fi
 if [ "$vol" -gt "70" ]; then
-	icon=""
+	icon="🔊"
 elif [ "$vol" -lt "30" ]; then
-	icon=""
+	icon="🔈"
 else
-	icon=""
+	icon="🔉"
 fi
 
 echo "$icon $vol%"

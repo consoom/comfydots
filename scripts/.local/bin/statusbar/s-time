@@ -1,3 +1,3 @@
 #!/bin/sh
 
-date '+ %R:%S'
+date '+🕒 %R:%S'
