@@ -1,0 +1,27 @@
+[global]
+    monitor = 0
+    follow = keyboard
+    width = 390
+    height = 370
+    offset = 0x25
+    padding = 2
+    horizontal_padding = 2
+    transparency = 5
+    font = Monospace 12
+    format = "<b>%s</b>\n%b"
+
+[urgency_low]
+    foreground = "#9c8d69"
+    background = "#2e313f"
+    timeout = 3
+
+[urgency_normal]
+    foreground = "#e8bf59"
+    background = "#2e313f"
+    timeout = 5
+
+[urgency_critical]
+    background = "#d24633"
+    foreground = "#590e06"
+    frame_color = "#300300"
+    timeout = 10
