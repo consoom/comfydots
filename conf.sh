@@ -142,6 +142,7 @@ postsetup () {
 	stow --target=/home/$USER/ --no-folding fontconfig
 	stow --target=/home/$USER/ --no-folding mimeapps
 	stow --target=/home/$USER/ --no-folding dunst
+	stow --target=/home/$USER/ --no-folding lf
 
 	# Symlink .zprofile in ~ to ~/.config/shell/profile
 	ln -sf /home/$USER/.config/shell/profile /home/$USER/.zprofile
